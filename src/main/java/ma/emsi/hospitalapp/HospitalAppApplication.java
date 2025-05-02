@@ -21,7 +21,7 @@ public class HospitalAppApplication {
     public CommandLineRunner start(Patientrepository patientrepository) {
         return args -> {
             Patient p1=Patient.builder()
-                    .nom("Salma")
+                    .nom("fatine")
                     .dateNaissance(new Date())
                     .malade(false)
                     .build();
@@ -33,12 +33,18 @@ public class HospitalAppApplication {
                     .build();
             patientrepository.save(p2);
             Patient p3=Patient.builder()
-                    .nom("Salma")
+                    .nom("Sanaa")
                     .dateNaissance(new Date())
                     .malade(false)
                     .build();
 
             patientrepository.save(p3);
+            Patient p4=Patient.builder()
+                    .nom("AbdElkader")
+                    .dateNaissance(new Date())
+                    .malade(false)
+                    .build();
+            patientrepository.save(p4);
 
             List<Patient> patients=patientrepository.findAll();
             patients.forEach(p->System.out.println(p.toString()));

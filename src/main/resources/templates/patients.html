@@ -15,6 +15,11 @@
     <div class="card">
         <div class="card-header"> Liste des Patients</div>
         <div class="card-body">
+            <form>
+                <label >Keyword</label>
+                <input type="text" name="keyword" th:value="${keyword}">
+                <button class="btn btn-outline-info">Search</button>
+            </form>
             <table class="table">
                 <thead>
                 <tr>
@@ -23,7 +28,7 @@
 
                 </thead>
                 <tbody>
-                <tr th:each="p:${listpatients}">
+                <tr th:each="p:${pagepatients}">
                     <td th:text="${p.id}"></td>
                     <td th:text="${p.nom}"></td>
                     <td th:text="${p.prenom}"></td>
@@ -31,12 +36,18 @@
                     <td th:text="${p.score}"></td>
                     <td th:text="${p.malade}"></td>
                     <td>
-                        <a  class="btn btn-danger" th:href="@{deletepatient(id=${p.id})}">Delete</a>
+                        <a onclick=" return confirm('etes vous sure?')" class="btn btn-danger" th:href="@{deletepatient(id=${p.id},keyword=${keyword},page=${currentpage})}">Delete</a>
                     </td>
 
                 </tr>
                 </tbody>
             </table>
+            <ul class="nav nav-pills">
+                <li th:each="page,status:${pages}">
+                    <a th:class="${status.Index==currentpage? 'btn btn-info m-1':'btn btn-outline-info m-1'}" th:href="@{/Index(page=${status.Index},size=${size},keyword=${keyword})}"
+                    th:text="${status.Index +1}"></a>
+                </li>
+            </ul>
         </div>
     </div>
 </div>
